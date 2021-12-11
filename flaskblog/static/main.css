@@ -2,6 +2,7 @@ body {
   background: #fafafa;
   color: #333333;
   margin-top: 5rem;
+  font-family: "Lucida Console";
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -133,3 +134,8 @@ a.article-title:hover {
 }
 
 .pagination a:hover:not(.active) {background-color: #ddd;}
+
+.linker a {
+  font-family: "Times New Roman", Times, serif;
+
+}
