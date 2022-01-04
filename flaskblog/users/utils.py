@@ -4,6 +4,14 @@ from PIL import Image
 from flask import url_for, current_app
 from flask_mail import Message
 from flaskblog import mail
+from bson import json_util , ObjectId
+import json
+from flask import Flask, jsonify
+
+
+
+
+
 
 
 def save_picture(form_picture):
@@ -23,7 +31,9 @@ def save_picture(form_picture):
     return picture_fn
 
 def send_reset_email(user):
+    
     token = user.get_reset_token()
+    
     msg = Message('Password Reset request ' ,
                   sender = 'dankm4324@gmail.com' ,
                   recipients = [user.email] )

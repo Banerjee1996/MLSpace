@@ -14,31 +14,33 @@ posts = Blueprint('posts',__name__)
 def new_post():
     form = PostForm()
     if form.validate_on_submit():
-        post  = Post(title = form.title.data ,content = form.content.data,author = current_user)
-        db.session.add(post)
-        db.session.commit()
+        Post(title = form.title.data ,
+        content = form.content.data,
+        author = current_user).save()
+        
 
         flash('Your post has been created !!!!','success')
         return redirect(url_for('main.home'))
     return render_template('create_post.html',title='New Post',form=form,legend = 'New Post')
 
 
-@posts.route("/post/<int:post_id>")
+@posts.route("/post/<post_id>")
 def post(post_id):
-    post  = Post.query.get_or_404(post_id)
+    post  = Post.objects(id=post_id).first()
     return render_template('post.html',title=post.title,post=post)
 
-@posts.route("/post/<int:post_id>/update",methods = ['GET','POST'])
+@posts.route("/post/<post_id>/update",methods = ['GET','POST'])
 @login_required
 def update_post(post_id):
-    post  = Post.query.get_or_404(post_id)
-    if post.author != current_user:
+    post  = Post.objects(id=post_id).first()
+    if post.author.id != current_user.id :
+        #flash(str(post.author.id),'success')
         abort(403)
     form = PostForm()
     if form.validate_on_submit():
         post.title = form.title.data
         post.content = form.content.data
-        db.session.commit()
+        post.save()
         flash('Your post has been updated !!!!','success')
         return redirect(url_for('posts.post',post_id=post.id))
     elif request.method == 'GET':
@@ -49,14 +51,13 @@ def update_post(post_id):
 
 
 
-@posts.route("/post/<int:post_id>/delete",methods = ['POST'])
+@posts.route("/post/<post_id>/delete",methods = ['POST'])
 @login_required
 def delete_post(post_id):
-    post  = Post.query.get_or_404(post_id)
-    if post.author != current_user:
+    post  = Post.objects(id=post_id).first()
+    if post.author.id != current_user.id :
         abort(403)
-    db.session.delete(post)
-    db.session.commit()
+    Post.objects(id=post_id).delete()
     flash('Your post has been updated !!!!','success')
     return redirect(url_for('main.home'))
 
