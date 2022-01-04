@@ -13,16 +13,10 @@ def load_user(user_id):
     return User.objects.get(id =user_id)
 
 class User(db.Document,UserMixin):
-    '''
-    username = db.Column(db.String(20),unique=True,nullable=False)
-    email = db.Column(db.String(120),unique=True,nullable=True)
-    image_file = db.Column(db.String(20),nullable=False,default = 'profile.jpg')
-    password = db.Column(db.String(60),nullable=False)
-    posts = db.relationship('Post',backref='author',lazy=True)
-    '''
+
     username = db.StringField(unique=True,max_length=20)
     email = db.StringField(required= True, unique = True,max_length=120)
-    image_file = db.StringField(max_length=20,required= True,default = 'profile.jpg')
+    image_file = db.StringField(max_length=40,required= True,default = 'profile.jpg')
     password = db.StringField(required= True,max_length=60)
     posts = db.ListField(db.ReferenceField('Post'))
     

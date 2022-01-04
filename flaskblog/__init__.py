@@ -6,21 +6,7 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flaskblog.config import Config
 from mongoengine import connect
-from bson.json_util import ObjectId
-import json
-from flask.json import JSONEncoder
 
-
-from mongoengine.base import BaseDocument
-from mongoengine.queryset.base import BaseQuerySet
-
-class MongoEngineJSONEncoder(JSONEncoder):
-    def default(self,obj):
-        if isinstance(obj,BaseDocument):
-            return json_util._json_convert(obj.to_mongo())
-        elif isinstance(obj,BaseQuerySet):
-            return json_util._json_convert(obj.as_pymongo())
-        return JSONEncoder.default(self, obj)
 
 
 
@@ -52,7 +38,7 @@ def create_app(config_class=Config):
     app.register_blueprint(main)
     app.register_blueprint(errors)
     
-    app.json_encoder = MongoEngineJSONEncoder
+   
     
 
     return app
