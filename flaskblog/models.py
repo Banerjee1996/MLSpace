@@ -24,7 +24,7 @@ class User(db.Document,UserMixin):
     
     def get_reset_token(self,expires_sec=18000):
         s = Serializer(current_app.config['SECRET_KEY'],expires_sec)
-        return s.dumps({'user_id':str(self.pk)}).decode('utf-8')
+        return s.dumps({'user_id': str(self.pk)}).decode('utf-8')
 
 
     @staticmethod
