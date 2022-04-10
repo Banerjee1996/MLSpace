@@ -1,6 +1,4 @@
 # flaskblog
 My website
 
-Just checking something
-
-again
+This will be deleted soon
