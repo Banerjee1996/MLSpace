@@ -3,7 +3,7 @@ from flaskblog.users.forms import (RegistrationForm , LoginForm , UpdateAccountF
 from flaskblog import db , bcrypt 
 from flaskblog.models import User , Post
 from flask_login import login_user , logout_user , current_user , login_required
-from flaskblog.users.utils import save_picture , send_reset_email
+from flaskblog.utils import save_picture , send_reset_email
 import os
 from bson import json_util
 import json

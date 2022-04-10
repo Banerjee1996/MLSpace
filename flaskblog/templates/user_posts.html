@@ -10,7 +10,7 @@
 		      <a class="mr-2" href="{{ url_for('users.user_posts',username=post.author.username) }}">{{ post.author.username }}</a>
 		      <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
 		    </div>
-		    <img src="https://images.ctfassets.net/hrltx12pl8hq/66lRNN2kfHcVSUMrmrcKxf/76b78071032586ff9766d8eb51592f21/free-nature-images.jpg?fit=fill&w=840&h=350" class="card-img-top" alt="Image Click Bait">
+		    <img class="card-img" src="{{ url_for('static', filename='post_pics/' + post.image_file) }}">
 		    <h2><a class="article-title" href="{{ url_for('posts.post', post_id=post.id) }}">{{ post.title }}</a></h2>
 		    <p class="article-content">{{ post.content }}</p>
 		    

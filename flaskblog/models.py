@@ -43,17 +43,12 @@ class User(db.Document,UserMixin):
 
 
 class Post(db.Document):
-    '''
-    id = db.Column(db.Integer,primary_key=True)
-    title = db.Column(db.String(100),nullable = False)
-    date_posted = db.Column(db.DateTime,nullable=False,default=datetime.utcnow)
-    content = db.Column(db.Text,nullable=False)
-    user_id = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
-    '''
+ 
     
     title = db.StringField(required= True,max_length=120)
     date_posted = db.DateTimeField(required=True,default=datetime.utcnow)
     content  = db.StringField(required= True,max_length= 500)
+    image_file = db.StringField(max_length=40,required= True,default = 'nature.jpg')
     author =  db.ReferenceField('User')
     
     meta = {'allow_inheritance': True}
